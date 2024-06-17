@@ -1,0 +1,65 @@
+ - Thiago atuou com testes dos bugs
+ 
+ - Tem backlog no jira para testar (Sprint 11)
+
+--Pedir adm da máquina
+
+Fazer os cenários UAT para o SUSEP.
+
+MKT-262 - Ver com Adriana e Fabio, pois não tem como testar atualmente
+
+MKTP-6, ver e fazer os cenários de testes (site institucional e portal semi-novos)
+
+MKTP-117 - Connected loan, liberação para a TDB (testes integrados) - testes em HML
+ - Campos / valores devem ir para a Mitsui;
+ - Fazer o end-to-end, gravar no BA, criar autbank, verificar se a proc esta gerando na tabela (ver com Jose Nascimento), efetivar no OV, verificar uma proc (ver com o Fabio), pois vai refletir e após outro cenário para o cancelamento do contrato;
+
+
+Acessos Thiago >
+Vdi: 
+gft_ts 
+Q2$2E46f!6B3b2Ui5%#
+Q2$2E46f!6B3b2Ui5%#
+
+Máquina / Sistemas:
+dgft_ts / btb@4040 ou btb@3040
+hgft_ts / uyt@7878
+
+***Acessos Direct HML
+COORDENADOR
+34539834592
+Btb@2024 / (dev) Btb@2025
+automacao.yaman1@gmail.com / yamanteste
+
+***Link board:
+https://bancotoyota.atlassian.net/jira/software/c/projects/MKTP/boards/317?sprints=1119
+
+VDI:
+Ambiente de Produção (PROD  VDI):
+•	Login: gft_ds1
+•	Senha: edc@1003
+Ambiente de Desenvolvimento (DEV):
+•	Login: dgft_ds1
+•	Senha: qaz@0924 - Máquina VDI
+Ambiente de Homologação (HOM):
+•	Login: hgft_ds1
+•	Senha: wsx@3009
+
+
+*** Atividades Maio/24:
+13/05: OnBoard;
+14/05: Apoio na execução de testes Susep;
+15/05: Apoio e execução de testes para o MKTP-117 (E2E Loan);
+16/05: Testes validação API (MKTP-121 / MKTP-122)
+
+
+Validar response apis Loan:
+
+https://bancotoyota.atlassian.net/browse/MKTP-121
+https://bancotoyota.atlassian.net/browse/MKTP-122
+https://bancotoyota.atlassian.net/browse/MKTP-262
+
+
+Carro conectado: 
+Seleciona a Hilux CD   
+ano 2023/2024 ou  2024/2025
