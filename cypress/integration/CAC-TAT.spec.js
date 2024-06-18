@@ -203,7 +203,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
         });
 
         it('Seleciona o arquivo utilizando uma fixture para o qual foi dada o alias', () => {
-            cy.fixture('info_BTB.txt').as('nomearquivo')
+            cy.fixture('./cypress/fixtures/info_BTB.txt').as('nomearquivo')
             cy.get('#file-upload')
             .selectFile('@nomearquivo')
             .should(function($input){   //verifica se foi feito o upload do arquivo
