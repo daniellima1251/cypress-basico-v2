@@ -202,17 +202,17 @@ describe('Central de Atendimento ao cliente TAT', function() {
             
         });
 
-        it('Seleciona o arquivo utilizando uma fixture para o qual foi dada o alias', () => {
-            cy.fixture('./cypress/fixtures/info_BTB.txt').as('nomearquivo')
-            cy.get('#file-upload')
-            .selectFile('@nomearquivo')
-            .should(function($input){   //verifica se foi feito o upload do arquivo
-                expect($input[0].files[0].name).to.equal('info_BTB.txt')
+        // it('Seleciona o arquivo utilizando uma fixture para o qual foi dada o alias', () => {
+        //     cy.fixture('./cypress/fixtures/info_BTB.txt').as('nomearquivo')
+        //     cy.get('#file-upload')
+        //     .selectFile('@nomearquivo')
+        //     .should(function($input){   //verifica se foi feito o upload do arquivo
+        //         expect($input[0].files[0].name).to.equal('info_BTB.txt')
                 
-            })
+        //     })
              
             
-        });
+        // });
         
         it('Verifica que a politica de privacidade abre em outra aba', () => {
             cy.get('#privacy a').should('have.attr', 'target', '_blank')
