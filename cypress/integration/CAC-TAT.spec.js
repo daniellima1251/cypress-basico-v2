@@ -166,7 +166,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
 
     it('Fazendo upload de arquivo simples', () => {
         cy.get('#file-upload')
-        .selectFile('C:/Users/dlio/OneDrive - GFT Technologies SE/Documents/Info_BTB.txt')
+        .selectFile('cypress/fixtures/Info_BTB.txt')
         //verificação no input 0 (1 arquivo) tem o nome 'Info_BTB.txt' >
         .then(input =>{
             expect(input[0].files[0].name).to.equal('Info_BTB.txt')
