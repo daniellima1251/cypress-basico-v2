@@ -10,5 +10,6 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v3
-        with: 
-              node-version: '20'
+        runs: 
+              using: 'node20'
+              main: 'main.js'
