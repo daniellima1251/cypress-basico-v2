@@ -187,11 +187,12 @@ describe('Central de Atendimento ao cliente TAT', function() {
 
         })
     })
+    
         
         it('seleciona um aquivo da pasta fixture', () => {
             cy.get('#file-upload')
             .should('not.have.value') //verifica se não tem nenhum arquivo selecionado
-            .selectFile('cypress/fixtures/example.json')
+            .selectFile('./cypress/fixtures/example.json')
             .should(function($input){   //verifica se foi feito o upload do arquivo
                 expect($input[0].files[0].name).to.equal('example.json')
                 
