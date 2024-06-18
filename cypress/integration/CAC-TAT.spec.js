@@ -177,8 +177,8 @@ describe('Central de Atendimento ao cliente TAT', function() {
     it('Fazendo o upload de vários arquivos', () => {
         cy.get('#file-upload')
         .selectFile([
-            'C:/Users/dlio/OneDrive - GFT Technologies SE/Documents/Info_BTB.txt',
-            'C:/Users/dlio/OneDrive - GFT Technologies SE/Documents/Info_GFT.txt'
+            'cypress/fixtures/Info_BTB.txt',
+            'cypress/fixtures/example.json'
         ])
         .then(input =>{
             console.log(input)
