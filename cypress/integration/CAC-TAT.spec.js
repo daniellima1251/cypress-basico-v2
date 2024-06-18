@@ -183,7 +183,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
         .then(input =>{
             console.log(input)
             expect(input[0].files[0].name).to.equal('Info_BTB.txt')
-            expect(input[0].files[1].name).to.equal('Info_GFT.txt')
+            expect(input[0].files[1].name).to.equal('example.json')
 
         })
     })
@@ -191,7 +191,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
         it('seleciona um aquivo da pasta fixture', () => {
             cy.get('#file-upload')
             .should('not.have.value') //verifica se não tem nenhum arquivo selecionado
-            .selectFile('./cypress/fixtures/example.json')
+            .selectFile('cypress/fixtures/example.json')
             .should(function($input){   //verifica se foi feito o upload do arquivo
                 expect($input[0].files[0].name).to.equal('example.json')
                 
