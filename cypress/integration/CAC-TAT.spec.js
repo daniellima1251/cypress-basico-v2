@@ -3,6 +3,7 @@
 const { it } = require("mocha")
 
 describe('Central de Atendimento ao cliente TAT', function() {
+    const QUATRO_SEGUNDOS = 4000
     //beforeEadh para executar toda vez em todos os testes >
      beforeEach(function() {
          cy.visit('src/index.html')  
@@ -13,6 +14,8 @@ describe('Central de Atendimento ao cliente TAT', function() {
 
     it ('Preenche os campos obrigatórios e envia o formuilário', function() {
         const longtext = 'Teste, Teste , Teste, Teste, Teste, Teste, Teste, Teste, Teste, Teste , Teste, Teste, Teste, Teste, Teste, Teste, Teste, Teste , Teste, Teste, Teste, Teste, Teste, Teste'
+        //comando para congelar o tempo do navegador >
+        cy.clock()
         cy.get('#firstName').should('be.visible').type('Daniel')
         cy.get('#lastName').should('be.visible').type('Lima')
         cy.get('#email').should('be.visible').type('email@teste.com', {delay:0})
@@ -20,18 +23,25 @@ describe('Central de Atendimento ao cliente TAT', function() {
         cy.contains('button','Enviar').click()
         cy.get('.success > strong').should('contain', 'Mensagem enviada com sucesso.')
         cy.get('.success > strong').should('be.visible')
-
+        //Comando para avançar o tempo do navegador para checar que a mensagem não esta mais visível >
+        cy.tick(QUATRO_SEGUNDOS)
+        cy.get('.success > strong').should('not.be.visible')
+        
         //Para otimizar a digitação colocar um delay = 0, para que o preenchimento seja instantaneo (.type('Daniel', {delay:0}))
 
     })
 
         it ('Exibe mensagem de erro ao submeter o formulário com um email inválido', function() {
+            cy.clock()
             cy.get('#firstName').should('be.visible').type('Daniel')
             cy.get('#lastName').should('be.visible').type('Lima')
             cy.get('#email').should('be.visible').type('email@teste, com', {delay:0})
             cy.get('#open-text-area').type('Text')
             cy.contains('button', 'Enviar').click()
             cy.get('.error > strong').should('be.visible')
+            cy.tick(QUATRO_SEGUNDOS)
+            cy.get('.error > strong').should('not.be.visible')
+            
         })
 
         it ('campo telefone continua vazio quando inserido um valor não-número', function() {
@@ -43,6 +53,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
 
         })
         it('Exibe mensagem de erro quando o telefone se torna obrigatório mnas não é preenchido antes do envio do formulário', () => {
+            cy.clock()
             cy.get('#firstName').should('be.visible').type('Daniel')
             cy.get('#lastName').should('be.visible').type('Lima')
             cy.get('#email').should('be.visible').type('email@teste.com', {delay:0})
@@ -51,6 +62,9 @@ describe('Central de Atendimento ao cliente TAT', function() {
             cy.get('#open-text-area').type('Text')
             cy.contains('button', 'Enviar').click()
             cy.get('.error > strong').should('be.visible')
+            cy.tick(QUATRO_SEGUNDOS)
+            cy.get('.error > strong').should('not.be.visible')
+            
             
         });
 
@@ -80,9 +94,13 @@ describe('Central de Atendimento ao cliente TAT', function() {
         });
 
         it('Exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+            cy.clock()
             cy.contains('.button', 'Enviar').click()
             
             cy.get('.error').should('be.visible')
+            cy.tick(QUATRO_SEGUNDOS)
+            cy.get('.error').should('not.be.visible')
+            
             
 
             
