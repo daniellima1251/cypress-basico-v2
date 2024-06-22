@@ -313,7 +313,7 @@ it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
  
 
   
-  it.only('Verifica o gato', () => {
+  it('Verifica o gato', () => {
     cy.get('#cat')
     .invoke('show')
     .should('be.visible')
