@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
-const { it } = require("mocha")
+// const { invoke } = require("cypress/types/lodash");
+// const { it } = require("mocha")
 
 describe('Central de Atendimento ao cliente TAT', function() {
     const QUATRO_SEGUNDOS = 4000
@@ -68,30 +69,38 @@ describe('Central de Atendimento ao cliente TAT', function() {
             
         });
 
-        it('Preenche e limpa os campos nome, sobrenome, email e telefone', () => {
-            cy.get('#firstName').should('be.visible')
-              .type('Daniel')
-              .should('have.value', 'Daniel')
-              .clear()
-              .should('have.value', '')
-            cy.get('#lastName')
-              .should('be.visible')
-              .type('Lima')
-              .should('have.value', 'Lima')
-              .clear().should('have.value', '')
-            cy.get('#email')
-              .should('be.visible')
-              .type('email@teste.com', {delay:0})
-              .should('have.value', 'email@teste.com')
-              .clear().should('have.value', '')
-            cy.get('#phone-checkbox').click()
-            cy.get('#phone')
-              .type('1195695656')
-              .should('have.value','1195695656')
-              .clear().should('have.value', '')
+        //Repete o teste por 3 vezes, utilizando o lodash >>
+        Cypress._.times(2, function () {
+
+            it('Preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+                cy.get('#firstName').should('be.visible')
+                  .type('Daniel')
+                  .should('have.value', 'Daniel')
+                  .clear()
+                  .should('have.value', '')
+                cy.get('#lastName')
+                  .should('be.visible')
+                  .type('Lima')
+                  .should('have.value', 'Lima')
+                  .clear().should('have.value', '')
+                cy.get('#email')
+                  .should('be.visible')
+                  .type('email@teste.com', {delay:0})
+                  .should('have.value', 'email@teste.com')
+                  .clear().should('have.value', '')
+                cy.get('#phone-checkbox').click()
+                cy.get('#phone')
+                  .type('1195695656')
+                  .should('have.value','1195695656')
+                  .clear().should('have.value', '')
+                
+                
+            });
             
-            
-        });
+        })
+
+
+        
 
         it('Exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
             cy.clock()
@@ -219,7 +228,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
             
             
         });
-
+        
         it('Seleciona o arquivo utilizando uma fixture para o qual foi dada o alias', () => {
             cy.fixture('Info_BTB.txt').as('nomearquivo')
             cy.get('#file-upload')
@@ -234,6 +243,7 @@ describe('Central de Atendimento ao cliente TAT', function() {
         
         it('Verifica que a politica de privacidade abre em outra aba', () => {
             cy.get('#privacy a').should('have.attr', 'target', '_blank')
+       
             
         });
     
@@ -246,5 +256,68 @@ describe('Central de Atendimento ao cliente TAT', function() {
             cy.contains('Talking About Testing').should('be.visible')
             
         });
+
+
+//         Exercício extra 2
+// Crie um teste chamado exibe e esconde as mensagens de sucesso e erro usando o .invoke()
+// 🙊 O teste deve ter a seguinte estrutura:
+
+it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+    cy.get('.success')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Mensagem enviada com sucesso.')
+      .invoke('hide')
+      .should('not.be.visible')
+    cy.get('.error')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios!')
+      .invoke('hide')
+      .should('not.be.visible')
+  })
+
+  //Atraves do comando invoke, esta pegando criando uma varíavel de texto longo, criado pelo lodash repetindo o texto por 20x
+  // setando o valor da variável textolongo para o campo locator pelo comando val
+  it('Preenche a area de texto usando o comando invoke', () => {
+
+    const textolongo = Cypress._.repeat('01234567890', 20)
+ // na linha abaixo, pegamos o locator de área, invocamos o valor dessa área, e atribuimos o conteudo da variável textolongo 
+ //e depois verificamos se estava visivel com o .should('be.visible')
+    cy.get('#open-text-area')
+    .invoke('val', textolongo)
+    .should('be.visible')
+      
+  });
+
+  //Código para fazer uma requisição a nivel de rede
+  it('Faz uma requisição HTTP', () => {
+    //Chamando ao url >
+    cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+    //Através do Should criando uma função de call back, com uma variárel resposta >
+    .should(function (resposta) {
+        //Atribuindo através da desconstrução do código, tres informações para uma variárel resposta
+        const {status, statusText, body} = resposta
+        //verificando se tem o retorno 200 para o status >
+        expect(status).to.equal(200)
+        //Verificando se tem o retorno OK para a informação statusText
+        expect(statusText).to.equal('OK')
+        //Verificando se foi incluido CAT TAT para a variável body
+        expect(body).to.include('CAC TAT')
+        
+    })
+      
+    });
+ 
+
+  
+  it.only('Verifica o gato', () => {
+    cy.get('#cat')
+    .invoke('show')
+    .should('be.visible')
+
+});
 
 });
